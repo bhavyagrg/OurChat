@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -61,8 +60,7 @@ class WorkArea extends StatelessWidget {
               ),
               Expanded(
                 flex: 1,
-                child: Expanded(
-                  flex: 1,
+                child: SizedBox(
                   child: ListView.builder(
                     itemBuilder: (context, idx) {
                       return const ListTile(
@@ -120,83 +118,42 @@ class WorkArea extends StatelessWidget {
                           Icons.video_call_rounded,
                           size: 24,
                         ),
+                        SizedBox(
+                          width: 24,
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
               //chat rendering
-              Card(
-                elevation: 2.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      leading: Icon(Icons.favorite_outline_outlined),
-                      title: Markdown(
-                        key: Key("defaultmarkdownformatter"),
-                        selectable: true,
-                        padding: EdgeInsets.all(10),
-                        data: "Hii, Beeeee",
-                      ),
+              Expanded(
+                  flex: 1,
+                  child: Card(
+                    elevation: 10.0,
+                    child: Markdown(
+                      listItemCrossAxisAlignment:
+                          MarkdownListItemCrossAxisAlignment.start,
+                      key: Key("defaultmarkdownformatter"),
+                      softLineBreak: true,
+                      data: """
+  # This is a Heading 1
+  ## This is a Heading 2
+  This is a paragraph with some *italic* and **bold** text.
+  - This is a bullet point
+  - Another bullet point
+  1. This is a numbered list
+  2. Another numbered item
+  """,
+                      selectable: true,
+                      physics: AlwaysScrollableScrollPhysics(),
+                      padding: EdgeInsets.all(10),
                     ),
-                  ],
-                ),
-              ),
+                  )),
             ],
           ),
         ),
       ],
-    )
-        // body: Column(
-        //   children: [
-        //     SizedBox(
-        //       height: 50,
-        //       child: Row(
-        //         children: [Expanded(child: Placeholder())],
-        //       ),
-        //     ),
-        //     Expanded(
-        //       child: Row(
-        //         children: [
-        //           NavigationRail(
-        //             destinations: const [
-        //               NavigationRailDestination(
-        //                 icon: Icon(Icons.home_rounded),
-        //                 label: Text("Home"),
-        //               ),
-        //               NavigationRailDestination(
-        //                 icon: Icon(Icons.settings),
-        //                 label: Text("Settings"),
-        //               ),
-        //             ],
-        //             selectedIndex: 0,
-        //           ),
-        //           Expanded(
-        //             flex: 2,
-        //             child: ListView.builder(
-        //               itemBuilder: (context, idx) {
-        //                 return ListTile(
-        //                   leading: CircleAvatar(
-        //                     child: Text("B"),
-        //                   ),
-        //                   title: Text("Beeeeee"),
-        //                   subtitle: Text("hi simmmmmmyyyyy"),
-        //                   trailing: Icon(
-        //                     Icons.done_all_rounded,
-        //                     size: 14,
-        //                   ),
-        //                 );
-        //               },
-        //               itemCount: 2,
-        //             ),
-        //           ),
-        //           Expanded(flex: 8, child: Placeholder())
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        );
+    ));
   }
 }
