@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown/markdown.dart' as md;
 
 void main() {
   runApp(const OurChat());
@@ -31,6 +33,22 @@ class WorkArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //markdown data
+    const String markdownData = """
+  # This is a Heading 1
+  ## This is a Heading 2
+  This is a paragraph with some *italic* and **bold** text.
+  - This is a bullet point
+  - Another bullet point
+  1. This is a numbered list
+  2. Another numbered item
+  ```c++
+  int main(){
+
+  }
+  ```
+  """;
+
     return Scaffold(
         body: Row(
       children: [
@@ -127,29 +145,51 @@ class WorkArea extends StatelessWidget {
                 ],
               ),
               //chat rendering
-              Expanded(
-                  flex: 1,
-                  child: Card(
-                    elevation: 10.0,
-                    child: Markdown(
-                      listItemCrossAxisAlignment:
-                          MarkdownListItemCrossAxisAlignment.start,
-                      key: Key("defaultmarkdownformatter"),
-                      softLineBreak: true,
-                      data: """
-  # This is a Heading 1
-  ## This is a Heading 2
-  This is a paragraph with some *italic* and **bold** text.
-  - This is a bullet point
-  - Another bullet point
-  1. This is a numbered list
-  2. Another numbered item
-  """,
-                      selectable: true,
-                      physics: AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.all(10),
-                    ),
-                  )),
+              // card 1
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: SizedBox(
+                        width: 500,
+                        height: 400,
+                        child: Card(
+                          elevation: 10.0,
+                          child: Markdown(
+                            listItemCrossAxisAlignment:
+                                MarkdownListItemCrossAxisAlignment.start,
+                            key: Key("defaultmarkdownformatter"),
+                            softLineBreak: true,
+                            data: markdownData,
+                            selectable: true,
+                            physics: AlwaysScrollableScrollPhysics(),
+                            padding: EdgeInsets.all(10),
+                          ),
+                        )),
+                  ),
+
+                  //right card
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: SizedBox(
+                        width: 500,
+                        height: 400,
+                        child: Card(
+                          elevation: 10.0,
+                          child: Markdown(
+                            listItemCrossAxisAlignment:
+                                MarkdownListItemCrossAxisAlignment.start,
+                            key: Key("defaultmarkdownformatter"),
+                            softLineBreak: true,
+                            data: markdownData,
+                            selectable: true,
+                            physics: AlwaysScrollableScrollPhysics(),
+                            padding: EdgeInsets.all(10),
+                          ),
+                        )),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
